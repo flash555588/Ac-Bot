@@ -45,6 +45,19 @@ Ac-Bot 是一个社群专属的跨平台机器人系统。当前 MVP 只实现 T
 - Telegram 专属类型放在 `packages/platform-contracts/src/telegram/`。
 - 不要在 core modules 中直接使用 `ChatJoinRequest`、`approveChatJoinRequest`、`declineChatJoinRequest`、`telegram_user_id`、`chat_id` 等 Telegram 专属概念。
 
+## 变更边界
+
+当前优先级：
+
+- Telegram 入群申请验证与审批
+- 平台无关核心模型
+- Cloudflare Workers / D1 / Queues 基础架构
+- 风险评分、验证流程、管理员审核、审计日志
+
+暂不主动实现偏离 MVP 的大型功能，例如支付系统、多社区 SaaS、AI 风控、完整 Web 管理台、积分系统。用户明确要求时，先补充或更新 spec，再进入实现。
+
+如果变更影响架构、数据模型、平台 adapter 边界或用户流程，应同步更新 `docs/specs/` 中的相关规格文档。
+
 ## 开发命令
 
 项目尚未脚手架化。脚手架完成后，应在这里补充实际命令。
@@ -80,3 +93,59 @@ Ac-Bot 是一个社群专属的跨平台机器人系统。当前 MVP 只实现 T
 - `pnpm test`
 
 如果命令尚不存在，在最终回复中说明未运行的原因。
+
+## 分支与提交
+
+分支命名：
+
+- `feat/<short-name>`：新增功能
+- `fix/<short-name>`：修复问题
+- `docs/<short-name>`：文档变更
+- `chore/<short-name>`：工程杂项
+- `refactor/<short-name>`：重构
+- `test/<short-name>`：测试相关
+
+提交信息优先使用中文，但必须保留英文类型前缀。格式：
+
+```text
+<type>: <中文说明>
+```
+
+常用类型：
+
+- `feat:` 新增功能
+- `fix:` 修复问题
+- `docs:` 文档变更
+- `chore:` 工程配置、依赖、脚本等杂项
+- `refactor:` 不改变行为的代码重构
+- `test:` 新增或修改测试
+- `style:` 格式、排版、命名等不影响逻辑的修改
+- `ci:` CI/CD 相关变更
+- `build:` 构建系统或依赖管理变更
+- `revert:` 回退提交
+
+示例：
+
+```text
+feat: 新增 Telegram 入群申请映射
+fix: 修复验证超时处理
+docs: 补充平台适配器约束
+chore: 初始化 pnpm workspace
+refactor: 拆分风险评分服务
+test: 覆盖重复入群申请幂等逻辑
+```
+
+全英文提交信息也可以接受，例如：
+
+```text
+feat: add Telegram join request mapper
+fix: handle verification timeout correctly
+```
+
+如果本次改动由 Codex 协助完成，commit message 末尾应追加：
+
+```text
+Co-authored-by: Codex <267193182+codex@users.noreply.github.com>
+```
+
+如果其他 AI 工具有官方 GitHub 身份，使用对应的 `Co-authored-by:` trailer；如果没有可验证 GitHub 身份，使用 `Assisted-by: <工具名称>` 透明标注。

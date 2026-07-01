@@ -42,6 +42,20 @@ Ac-Bot 是一个社群专属的跨平台机器人系统。当前 MVP 聚焦 Tele
 - 所有外部请求必须有超时和错误处理。
 - 不要提交任何 token、secret、私钥或真实用户数据。
 
+## AI 编程助手
+
+本项目鼓励使用 AI 编程助手，包括但不限于 Codex、Claude Code、Cursor、GitHub Copilot 等。AI 工具可以用于阅读代码、生成草稿、实现功能、补充测试、检查文档和排查问题。
+
+使用 AI 工具时必须遵守：
+
+- 提交者需要理解并审查 AI 生成的代码。
+- 提交者对最终提交的正确性、安全性、版权风险和维护成本负责。
+- 不要把 token、secret、私钥、真实用户资料、导出的审核或问卷数据提供给 AI 工具。
+- AI 生成的代码必须经过与人工代码相同的测试、review 和安全检查。
+- 如果 AI 工具修改了架构、数据模型、平台 adapter 边界或用户流程，应同步更新 `docs/specs/` 中的相关规格文档。
+
+AI 工具不是责任主体。合并到仓库中的代码由提交者和 reviewer 共同负责。
+
 ## 分支与提交
 
 分支命名：
@@ -88,6 +102,45 @@ test: 覆盖重复入群申请幂等逻辑
 ```text
 feat: add Telegram join request mapper
 fix: handle verification timeout correctly
+```
+
+如果提交中有 AI 工具实质参与，应在 commit message 末尾标注。GitHub 支持 `Co-authored-by:` trailer；要在 GitHub 页面显示为共同作者，该邮箱必须关联到对应 GitHub 账号，或使用该账号的 GitHub no-reply 邮箱。参考 GitHub 文档：<https://docs.github.com/en/pull-requests/committing-changes-to-your-project/creating-and-editing-commits/creating-a-commit-with-multiple-authors>
+
+格式：
+
+```text
+<type>: <中文说明>
+
+Co-authored-by: <名称> <邮箱>
+```
+
+多人或多个工具共同参与时，每个共同作者单独一行：
+
+```text
+feat: 新增 Telegram 入群申请映射
+
+Co-authored-by: Alice <alice@example.com>
+Co-authored-by: Claude Code <claude@example.com>
+```
+
+本项目使用 Codex 协助提交时，使用 GitHub 上的 `@codex` 账号作为共同作者：
+
+```text
+docs: 补充贡献指南
+
+Co-authored-by: Codex <267193182+codex@users.noreply.github.com>
+```
+
+其他 AI 工具如果有官方 GitHub 身份，也应使用对应的 GitHub no-reply 邮箱：
+
+```text
+Co-authored-by: <工具官方 GitHub 身份> <工具官方 GitHub 邮箱>
+```
+
+如果工具没有提供可验证的 GitHub 身份，不能保证 GitHub UI 显示为共同作者。此时使用 `Assisted-by:` 透明标注：
+
+```text
+Assisted-by: <工具名称>
 ```
 
 ## Pull Request 要求
