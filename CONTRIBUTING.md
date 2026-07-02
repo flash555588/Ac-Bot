@@ -60,6 +60,8 @@ AI 工具不是责任主体。合并到仓库中的代码由提交者和 reviewe
 
 不要直接在本地或远程的主分支（如 `main`、`master`）上提交或推送改动。开始工作前应优先从最新主分支新建工作分支，完成内容改动、检查和提交后，通过 Pull Request 合并回主分支。
 
+一次 Pull Request 应只解决一个清晰的问题或交付一个内聚的小目标。不要把无关的重构、格式化、依赖升级、文档调整和功能实现混在同一个 PR 或同一个 commit 中。commit 应符合开源社区常见实践：主题明确、范围适中、可单独 review；如果改动自然分成多个逻辑步骤，应拆成多个相关 commit，而不是堆成一个大提交。
+
 分支命名：
 
 - `feat/<short-name>`：新增功能
@@ -108,6 +110,8 @@ fix: handle verification timeout correctly
 
 如果提交中有 AI 工具实质参与，应在 commit message 末尾标注。GitHub 支持 `Co-authored-by:` trailer；要在 GitHub 页面显示为共同作者，该邮箱必须关联到对应 GitHub 账号，或使用该账号的 GitHub no-reply 邮箱。参考 GitHub 文档：<https://docs.github.com/en/pull-requests/committing-changes-to-your-project/creating-and-editing-commits/creating-a-commit-with-multiple-authors>
 
+当 AI 工具是主要实现者时，可以将该 AI 工具作为 commit author，并将人工负责人写入 `Co-authored-by:` trailer。署名顺序用于如实反映主要实现来源，不改变责任边界；提交者、人工负责人和 reviewer 仍需对最终提交负责。
+
 格式：
 
 ```text
@@ -125,15 +129,21 @@ Co-authored-by: Alice <alice@example.com>
 Co-authored-by: Claude Code <claude@example.com>
 ```
 
-本项目使用 Codex 协助提交时，使用 GitHub 上的 `@codex` 账号作为共同作者：
+本项目使用 Codex 作为主要实现者提交时，commit author 可以使用 GitHub 上的 `@codex` 账号：
+
+```text
+Codex <267193182+codex@users.noreply.github.com>
+```
+
+并在 commit message 中将人工负责人标注为共同作者：
 
 ```text
 docs: 补充贡献指南
 
-Co-authored-by: Codex <267193182+codex@users.noreply.github.com>
+Co-authored-by: ztm0929 <34964951+ztm0929@users.noreply.github.com>
 ```
 
-其他 AI 工具如果有官方 GitHub 身份，也应使用对应的 GitHub no-reply 邮箱：
+如果改动主要由人工完成、Codex 或其他 AI 工具只是辅助，可以使用对应 AI 工具的官方 GitHub 身份作为共同作者。其他 AI 工具如果有官方 GitHub 身份，也应使用对应的 GitHub no-reply 邮箱：
 
 ```text
 Co-authored-by: <工具官方 GitHub 身份> <工具官方 GitHub 邮箱>
