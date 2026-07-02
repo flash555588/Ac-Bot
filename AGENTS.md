@@ -98,6 +98,8 @@ Ac-Bot 是一个社群专属的跨平台机器人系统。当前 MVP 只实现 T
 
 不要直接在本地或远程的主分支（如 `main`、`master`）上提交或推送改动。开始工作前应优先从最新主分支新建工作分支，完成内容改动、检查和提交后，通过 Pull Request 合并回主分支。
 
+一次 Pull Request 应只解决一个清晰的问题或交付一个内聚的小目标。不要把无关的重构、格式化、依赖升级、文档调整和功能实现混在同一个 PR 或同一个 commit 中。commit 应符合开源社区常见实践：主题明确、范围适中、可单独 review；如果改动自然分成多个逻辑步骤，应拆成多个相关 commit，而不是堆成一个大提交。
+
 分支命名：
 
 - `feat/<short-name>`：新增功能
@@ -144,10 +146,10 @@ feat: add Telegram join request mapper
 fix: handle verification timeout correctly
 ```
 
-如果本次改动由 Codex 协助完成，commit message 末尾应追加：
+如果本次改动主要由 Codex 完成，commit author 可以使用 Codex，并在 commit message 末尾追加实际人工负责人的共同作者信息。以下 `ztm0929` 仅为本仓库当前维护者示例，不能在其他人工负责人场景中硬编码复用：
 
 ```text
-Co-authored-by: Codex <267193182+codex@users.noreply.github.com>
+Co-authored-by: ztm0929 <34964951+ztm0929@users.noreply.github.com>
 ```
 
-如果其他 AI 工具有官方 GitHub 身份，使用对应的 `Co-authored-by:` trailer；如果没有可验证 GitHub 身份，使用 `Assisted-by: <工具名称>` 透明标注。
+如果本次改动主要由人工完成、Codex 或其他 AI 工具只是辅助，可以使用对应 AI 工具的官方 GitHub 身份作为 `Co-authored-by:` trailer；如果没有可验证 GitHub 身份，使用 `Assisted-by: <工具名称>` 透明标注。无论署名顺序如何，合并到仓库中的代码都由提交者、人工负责人和 reviewer 共同负责。
